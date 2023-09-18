@@ -1,0 +1,118 @@
+C PROGRAMMING
+
+Programación imperativa
+El codigo no te ayuda en nada, el programador tiene que indicar absolutamente todas las instrucciones o pasos para que el programa funcione de la forma que se necesita. 
+
+Programación procesal
+Todo nuestro programa va a estar dividido en regiones de codigo que son funciones, con valores de entrada y de salida. Una funcion puede aceptar un parametro y devolver un resultado. Todo el codigo va a estar siempre dentro de funciones. 
+
+Función main()
+Esta es la función principal donde se hacen las asignaciones y los llamados a las funciones que compone mi codigo. 
+
+Archivos de cabecera
+Son las librerias que debo incluir al inicio del codigo para que C conozca las funciones que necesito utilizar. #include <stdio.h>
+
+Tipos de instrucciones
+Grupo 1: Asignaciones
+Guarda un valor en la memoria temporal. Como por ejemplo guardar un calculo para usarlo despues. 
+Grupo2: Condicionales. 
+A partir de una condición se ejecuta una instrucción u otra.
+Grupo 3: Bucles
+El programa repite una serire de instrucciones un numero de veces o hasta que una condición se cumpla.
+Grupo 4: Llamadas. 
+Cuando una funcion invoca a otra función para poder utilizarla. 
+
+Variables y tipos de datos
+Tipos de datos 
+INT- Números enteros = 100, 255
+FLOAT - Números decimales = = 10.34, 65.21
+CHAR - caracteres simples = 'A', 'a', '!'
+CHAR - caracteres compuestos = "Hola mundo"
+VOID - La nada, funciones que no retornan nada, solo ejecuta un procedimiento.
+
+Se guardan dos tipos de numeros porque el procesador los manipula diferente.
+
+Subtipos de INT
+SHORT: 16 bits
+INT: 32 bits
+LONG: 64 bits
+UNSIGNED: No utiliza signo. Contempla unicamente los valores a partir del 0, no incluye valores negativos. Ej char: de -128 a 127.
+SIGNED: Si utiliza signo. Contempla valores positivos y negativos. Ej char: de 0 a 255. 
+Ningun estandar dice cuanto ocupa cada uno, excepto por el procesador intel que utiliza los valores definidos arriba.
+
+Cadenas de CHAR
+Las cadenas de caracteres siempre finalizan con un caracter 0 que es el indicador de que la cadena termina. es su caracter null. Este caracter no se ve, por tanto si mi char tiene la cadena "Pepito" va a tener 7 posiciones. 
+
+Impresion de variables ya estando declaradas y con un valor asignado
+INT, CHAR simple y CHAR cadena
+printf("y = %d, x = %c", nombre = %s, y, x); -> 
+%d por "decimal". 
+%c por "char simple". 
+%s por "char cadena".
+%u por "unsigned int".
+
+Bucles
+Hay 3 tipos: WHILE, DO WHILE y FOR. 
+WHILE verifica primero una condición y luego ejecuta el codigo mientras se cumpla su condición. Es necesario incluir alguna forma de salir de este bucle porque sino continua de forma infinita. El codigo no se ejecuta nunca a menos que la condición se cumpla.
+
+DO WHILE primero ejecuta una instrucción y luego verifica si una condicion se cumple o no. El codigo se ejecuta al menos una vez.
+
+FOR se utiliza cuando queremos que un codigo se ejecute una determinada cantidad de veces. La condición se evalúa antes de ejecutar el codigo y si esta se cumple funciona. 
+
+Punteros
+Las variables se guardar en una ubicación de memoria que puede ser un numero muy random. Los punteros nos permiten guardar estas direcciones de memoria en donde estan alojadas las variables.
+&miVariable -> Así accedo al valor de memoria de una variable.
+int miVariable = 10;; -> Definición de mi variable.
+int* dirMiVariable = &miVariable; -> Puntero a la direccion de mi variable. El tipo de dato debe coincidir.
+
+Cuando defino una variable y la paso como parametro, estoy utilizando una copia de esa variable, por tanto su valor original va a seguir siendo el que le fue asignado primeramente. Cuando necesito almacenar un nuevo valor posterior a su definición y asignación, cobran importancia los punteros ya que me permiten alojar nuevos valores en esa posición de memoria.
+
+Estructuración de datos
+1) Arrays/Vectores/Arreglos
+Forma de organizar en memoria datos declarando un numero de datos en posiciones contiguas de memoria. Tenemos un unico identificador para acceder a todas esas posiciones de memoria. Utilizamos un indice para referirnos a una concreta posición que nos interesa. 
+int edades[8]; -> las posiciones van de 0 a 7.
+Al manipular memoria estatica es necesario decirle al compilador cuantos elementos componen a las edadas, por eso se aclara el [8].
+
+VLA - Variable length arrays
+Cuando la longitud del array no está predefinida y es pasada como parámetro. 
+
+Acceder a las direcciones de memoria cuando estas son variables
+&x
+(&x)+1
+(&x)+2
+(&x)+3
+...y así sucesivamente...
+
+2) Estructuras
+STRUCT es una forma de agrupar datos que se relacionan entre sí.
+Sirve cuando estamos haciendo un programa donde necesitamos gestionar cuentas bancarias, entidades de personas, etc. Se le introducen todas las priopiedades que esas entidades puedan tener y se las trabaja como conjunto. En C las estructuras funcionan como bloques.
+
+struct cuenta {
+	char nombre[8];
+	char apellido[12];
+	int saldo;
+};
+
+La estructura se define por fuera de la funcion main y se declara dentro de main con el tipo de dato struct. En main puedo asignarle valores a sus atributos. 
+
+int main(){
+	struct cuenta c1; 
+	c1.nombre = "Pedro"
+	c2.apellido ="Perez Lopez"
+}
+
+Una estructura puede ser pasada como parametro y se pueden mostrar sus datos. En caso de pasar como param un puntero a una estructura la forma de acceder a sus valores es diferente. 
+
+Pasar por parametro una estructura
+
+void imprimir_datos(struct cuenta c){
+	printf("el cliente %s %s tiene %d euros en la cuenta.\n", 
+	c.nombre, c.apellido, c.saldo);
+}
+
+Pasar por parametro un puntero a una estructura
+
+void imprimir_datos(struct cuenta *c){
+	printf("el cliente %s %s tiene %d euros en la cuenta.\n", 
+	c->nombre, c->apellido, c->saldo);
+}
