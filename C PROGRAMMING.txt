@@ -116,3 +116,48 @@ void imprimir_datos(struct cuenta *c){
 	printf("el cliente %s %s tiene %d euros en la cuenta.\n", 
 	c->nombre, c->apellido, c->saldo);
 }
+
+3) Unions
+Se definen de la misma forma que las structs pero con la palabra reservada union. A diferencia de las estructuras, todos los atributos contenidos en una union van a ocupar el mismo lugar de memoria, es más dificil de acceder. Se usa en situaciones muy concretas.
+
+union mi_union_t {
+	int entero;
+	float flotante;
+};
+
+4) Enumeradores
+Sirven para construir un conjunto de identificadores. El identificador en la primera posicion ocupa el lugar 0.
+
+enum diasemana {LUNES = 1, MARTES = 2, MIERCOLES = 3, JUEVES = 4, VIERNES = 5};
+
+int main(){
+	enum diasemana dia;
+
+	dia = VIERNES;
+	printf(%d\n, dia); //Esto va a imprimir el numero 5.
+}
+
+5) typedef
+Sirven para renombrar los tipos de datos. Si creo un typedef a partir de ese momento esa pasa a ser una palabra reservada, por ende no puedo crear una variable con ese nombre.
+
+typedef struct empleado_t Empleado; //A partir de ahora en lugar de escribir struct empleado_t puedo escribir directamente Empleado.
+
+Memoria dinámica
+Las VLAs mueren cuando salimos de la funcion donde fueron declaradas porque son variables locales.
+La memoria dinamica la gestionamos manualmente, eso implica liberarla cuando no la necesitemos para evitar que nuestro programa se quede sin memoria. 
+
+malloc
+Tiene un parametro que es el que indica cuantos bytes queremos reservar en nuestro espacio de memoria. Esta función va a devolver un puntero de tipo void así que para poder usarla hay que convertirlo a un puntero que se quiera manejar. 
+
+//Si quisiera reservar espacio en memoria para 4000 flotantes.
+//Convierto el tipo de dato void que retorna malloc a float que es donde estoy guardando los valores obtenidos.
+
+int main(){
+	float* valores = (float*) malloc(4000 *sizeof(float)); 	
+	... //mi codigo a partir de los valores
+	free(valores);
+}
+
+Si le exigimos más memoria a malloc de la que tiene disponible este va a fallar y devuelve null. Se podría verificar con un if ( valor == NULL) -> significa que no hay tanta memoria disponible.
+
+Es necesario liberar la memoria una vez finalizado el proceso. Una vez liberado ya no puedo acceder a los valores (como en el ejemplo de arriba).
