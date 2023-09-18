@@ -161,3 +161,24 @@ int main(){
 Si le exigimos más memoria a malloc de la que tiene disponible este va a fallar y devuelve null. Se podría verificar con un if ( valor == NULL) -> significa que no hay tanta memoria disponible.
 
 Es necesario liberar la memoria una vez finalizado el proceso. Una vez liberado ya no puedo acceder a los valores (como en el ejemplo de arriba).
+
+
+	---------------------------------------------------
+
+El procesador
+Al clickear el build, se invoca un pre procesador que lo que va a hacer es "masticar" el codigo y pasarselo al gcc para que lo pueda correr. Por ejemplo eliminando los comentarios, utilizando las librerias pre definidas al principio del codigo, etc. 
+El pre procesador va leyendo linea a linea el codigo del archivo. 
+Las cosas que lee afectan a partir del instante que son leidas. 
+
+1º) Procesar las sentencias del compilador.
+#include
+Se usa para importar los archivos de librerias que voy a necesitar. Ej si incluyo <stdio.h> este va a crear un archivo aparte con todo lo contiene.
+
+#define 
+Sirve para definir sustituciones. Le paso dos parametros en donde el primero es el identificador que quiero crear y el segundo es qué quiero que valga el primero. 
+Ej incluyo #define LIMITE 100 y si en un printf imprimo la variable LIMITE se va a leer 100.
+Es una buena práctica ponerlos al principio con los inlcudes y no en medio del codigo.
+ 
+#undef
+El define sirve para quitar la definición de algo.
+Ej si declaro #undef LIMITE a partir de ese momento LIMITE deja de valer 100 y deja de existir.
