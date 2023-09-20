@@ -12,7 +12,7 @@ int main()
 {
     int opCod;
     int cantEstudiantes = 0;
-    struct Estudiante *listaEstudiantes = NULL;
+    struct Estudiante *estudiantes = NULL;
 
     while(1) {
         printf("Ingrese código de operación a realizar: \n");
@@ -22,26 +22,22 @@ int main()
         switch(opCod){
             case AGREGAR_ESTUDIANTE:
                 cantEstudiantes++;
-                listaEstudiantes = (struct Estudiante*)realloc(listaEstudiantes, sizeof(struct Estudiante)*cantEstudiantes);
+                estudiantes = (struct Estudiante*)malloc(cantEstudiantes * sizeof(struct Estudiante));
+
+                if (estudiantes == NULL) {
+                    printf("Error al asignar memoria para estudiantes.\n");
+                    exit(1);
+                }
 
                 printf("Ingrese el nombre del nuevo estudiante: ");
-                scanf("%s", listaEstudiantes[cantEstudiantes - 1].nombre);
+                scanf("%s", estudiantes[cantEstudiantes - 1].nombre);
                 printf("Ingrese la edad del nuevo estudiante: ");
-                scanf("%d", listaEstudiantes[cantEstudiantes - 1].edad);
-                printf("¡El estudiante se agregó con éxito!");
+                scanf("%d", estudiantes[cantEstudiantes - 1].edad);
+                printf("¡El estudiante se agregó con éxito!\n");
 
                 break;
 
             case MOSTRAR_ESTUDIANTES:
-                if(cantEstudiantes == 0){
-                    printf("No existen estudiantes para mostrar \n");
-                } else {
-                    printf("Los estudiantes inscriptos son: \n");
-                    for(int i = 0; i < cantEstudiantes; i++){
-                        printf("Nombre: %s\n", listaEstudiantes[i].nombre);
-                        printf("Nombre: %d\n", listaEstudiantes[i].edad);
-                    }
-                }
 
                 break;
 
@@ -51,9 +47,9 @@ int main()
 
             case SALIR:
                     for(int i = 0; i < cantEstudiantes; i++){
-                        free(listaEstudiantes[i].nombre);
+                        free(estudiantes[i].nombre);
                     }
-                    free(listaEstudiantes);
+                    free(estudiantes);
                     printf("¡Hasta pronto!");
                     exit(0);
                 break;
